@@ -1,23 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useRef, useEffect, useState } from "react";
+import "./App.scss";
+import desktopImg from "./images/desktop.jpg";
+import mobileImg from "./images/mobile.jpg";
+import { TimelineLite, Power2 } from "gsap";
+import CSSRulePlugin from "gsap/CSSRulePlugin";
 
 function App() {
+  const [size, setSize] = useState(window.screen.width);
+  window.addEventListener("resize", () => {
+    setSize(window.screen.width);
+  });
+
+  let image = useRef(null);
+  let imageReveal = CSSRulePlugin.getRule(".img-container:after");
+  let container = useRef(null);
+  console.log(imageReveal);
+
+  let tl = new TimelineLite();
+
+  useEffect(() => {
+    tl.to(container, 0, { css: { visibility: "visible" } })
+      .to(imageReveal, 2, {
+        height: "0%",
+        ease: Power2.easeInOut,
+        delay: 1,
+      })
+      .from(image, 2, { scale: 1.6, ease: Power2.easeInOut, delay: -2 });
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div ref={(el) => (container = el)} className="container">
+      <div className="img-container">
+        <img
+          ref={(el) => (image = el)}
+          src={window.screen.width > 600 ? desktopImg : mobileImg}
+        />
+        <h1 className="title">
+          MUSIC
+          <br />
+          UNITES US
+        </h1>
+      </div>
     </div>
   );
 }
