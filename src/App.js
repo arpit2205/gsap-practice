@@ -14,12 +14,14 @@ function App() {
   let image = useRef(null);
   let imageReveal = CSSRulePlugin.getRule(".img-container:after");
   let container = useRef(null);
+  let text = useRef(null);
   console.log(imageReveal);
 
   let tl = new TimelineLite();
 
   useEffect(() => {
     tl.to(container, 0, { css: { visibility: "visible" } })
+      .from(text, 1, { y: 20, opacity: 0, delay: 1 })
       .to(imageReveal, 2, {
         height: "0%",
         ease: Power2.easeInOut,
@@ -34,7 +36,7 @@ function App() {
           ref={(el) => (image = el)}
           src={window.screen.width > 600 ? desktopImg : mobileImg}
         />
-        <h1 className="title">
+        <h1 ref={(el) => (text = el)} className="title">
           MUSIC
           <br />
           UNITES US
