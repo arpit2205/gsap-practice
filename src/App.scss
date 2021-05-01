@@ -9,6 +9,7 @@
   background-color: black;
   visibility: hidden;
   position: relative;
+  overflow-x: hidden;
 }
 
 .img-container {
@@ -39,7 +40,7 @@
 }
 
 .title {
-  position: absolute;
+  position: fixed;
   z-index: 998;
   bottom: 0;
   left: 0;
@@ -64,14 +65,14 @@
   @media (max-width: 600px) {
     top: 8px;
     right: 8px;
-    transform: scale(0.7);
+    transform: scale(0.6);
   }
 }
 
 .nav {
   position: absolute;
   z-index: 999;
-  background-color: white;
+  background-color: black;
   height: 0;
   // visibility: hidden;
   width: 100vw;
@@ -84,7 +85,7 @@
   justify-content: center;
   align-content: center;
   visibility: hidden;
-  color: black;
+  color: white;
   opacity: 0;
 }
 
@@ -116,7 +117,7 @@
   }
 
   @media (max-width: 600px) {
-    font-size: 40px;
+    font-size: 48px;
     padding: 16px 8px;
   }
 }
@@ -132,4 +133,10 @@
     right: 8px;
     transform: scale(0.5);
   }
+}
+
+.sec-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
 }

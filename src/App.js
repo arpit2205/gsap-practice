@@ -92,6 +92,10 @@ function App() {
           UNITES US
         </h1>
       </div>
+
+      <section className="secondary">
+        <div className="sec-container"></div>
+      </section>
     </div>
   );
 }
