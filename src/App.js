@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import "./App.scss";
 import desktopImg from "./images/desktop.jpg";
 import mobileImg from "./images/mobile.jpg";
-import { TimelineLite, Power2 } from "gsap";
+import { TimelineLite, TweenMax, Power2 } from "gsap";
 import CSSRulePlugin from "gsap/CSSRulePlugin";
 import guitar from "./images/guitar.png";
 import sticks from "./images/sticks.png";
@@ -38,12 +38,16 @@ function App() {
         css: { visibility: "visible" },
       })
       .to(navContent, 1, { opacity: 1, ease: Power2.easeInOut, delay: -1 });
+
+    TweenMax.to(container, 0, { css: { overflow: "hidden" } });
   };
 
   const hideMenu = () => {
     tl.to(navContent, 1, { opacity: 0, ease: Power2.easeInOut })
       .to(navContent, 0, { css: { visibility: "hidden" } })
       .to(nav, 1, { height: "0%", ease: Power2.easeInOut });
+
+    TweenMax.to(container, 0, { css: { overflowY: "auto" } });
   };
 
   useEffect(() => {
