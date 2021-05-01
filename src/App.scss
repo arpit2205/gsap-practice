@@ -40,7 +40,7 @@
 
 .title {
   position: absolute;
-  z-index: 999;
+  z-index: 998;
   bottom: 0;
   left: 0;
   font-family: "Montserrat", sans-serif;
@@ -51,5 +51,48 @@
   @media (max-width: 600px) {
     font-size: 60px;
     padding: 64px 8px;
+  }
+}
+
+.guitar {
+  position: fixed;
+  z-index: 998;
+  top: 64px;
+  right: 100px;
+  cursor: pointer;
+  trasnform: scale(1.2);
+
+  @media(max-width: 600px) {
+    top: 8px;
+    right: 8px;
+    transform: scale(0.7)
+  }
+}
+
+.nav {
+  position: absolute;
+  z-index: 999;
+  background-color: white;
+  height: 0;
+  // visibility: hidden;
+  width: 100vw;
+}
+
+.nav-content {
+  visibility: hidden;
+  color: white;
+  opacity: 0;
+}
+
+.sticks {
+  position: absolute;
+  top: 64px;
+  right: 100px;
+  cursor: pointer;
+  transform: scale(0.8);
+  @media(max-width: 600px) {
+    top: 8px;
+    right: 8px;
+    transform: scale(0.5)
   }
 }
