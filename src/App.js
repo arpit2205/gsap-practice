@@ -8,7 +8,7 @@ import guitar from "./images/guitar.png";
 import sticks from "./images/sticks.png";
 import me from "./images/me.JPG";
 import meTwo from "./images/meTwo.JPG";
-import drums from './images/drums.jpg'
+import drums from "./images/drums.jpg";
 
 function App() {
   const [size, setSize] = useState(window.screen.width);
@@ -72,6 +72,12 @@ function App() {
             className="sticks"
             onClick={hideMenu}
           />
+
+          <div className="links">
+            <h2 className="link">ABOUT</h2>
+            <h2 className="link">PROJECTS</h2>
+            <h2 className="link">CONTACT</h2>
+          </div>
         </nav>
       </div>
 
