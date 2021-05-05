@@ -2,13 +2,16 @@ import React, { useRef, useEffect, useState } from "react";
 import "./App.scss";
 import desktopImg from "./images/desktop.jpg";
 import mobileImg from "./images/mobile.jpg";
-import { TimelineLite, TweenMax, Power2 } from "gsap";
+import { TimelineLite, TweenMax, Power2, gsap } from "gsap";
 import CSSRulePlugin from "gsap/CSSRulePlugin";
 import guitar from "./images/guitar.png";
 import sticks from "./images/sticks.png";
 import me from "./images/me.JPG";
 import meTwo from "./images/meTwo.JPG";
 import drums from "./images/drums.jpg";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   const [size, setSize] = useState(window.screen.width);
@@ -25,8 +28,39 @@ function App() {
   let navContent = useRef(null);
   let sticksImg = useRef(null);
   // console.log(imageReveal);
+  let heading = useRef(null);
 
   let tl = new TimelineLite();
+
+  useEffect(() => {
+    gsap.to(".sec-container", {
+      scrollTrigger: {
+        trigger: ".sec-container",
+        scrub: 2,
+      },
+      css: { backgroundColor: "#444" },
+      ease: Power2.easeInOut,
+    });
+
+    gsap.from(".heading", {
+      scrollTrigger: {
+        trigger: ".heading",
+        // scrub: true,
+      },
+      opacity: 0,
+      y: 100,
+      duration: 1,
+      ease: Power2.easeInOut,
+    });
+    gsap.from(".paragraph", {
+      scrollTrigger: {
+        trigger: ".paragraph",
+      },
+      opacity: 0,
+      duration: 4,
+      ease: Power2.easeInOut,
+    });
+  }, []);
 
   const showMenu = () => {
     tl.to(nav, 1, {
@@ -59,46 +93,67 @@ function App() {
       })
       .from(image, 2, { scale: 1.6, ease: Power2.easeInOut, delay: -2 })
       .from(guitarImg, 0.4, { opacity: 0, y: -20, ease: Power2.easeInOut });
+
+    // gsap.to(".heading", {
+    //   scrollTrigger: { trigger: "section" },
+    //   x: 200,
+    //   duration: 2,
+    // });
   }, []);
+
   return (
-    <div ref={(el) => (container = el)} className="container">
-      <img
-        ref={(el) => (guitarImg = el)}
-        src={guitar}
-        className="guitar"
-        onClick={showMenu}
-      />
-      <div ref={(el) => (nav = el)} className="nav">
-        <nav ref={(el) => (navContent = el)} className="nav-content">
-          <img
-            ref={(el) => (sticksImg = el)}
-            src={sticks}
-            className="sticks"
-            onClick={hideMenu}
-          />
-
-          <div className="links">
-            <h2 className="link">ABOUT</h2>
-            <h2 className="link">PROJECTS</h2>
-            <h2 className="link">CONTACT</h2>
-          </div>
-        </nav>
-      </div>
-
-      <div className="img-container">
+    <div style={{ overflowX: "hidden" }}>
+      <div ref={(el) => (container = el)} className="container">
         <img
-          ref={(el) => (image = el)}
-          src={window.screen.width > 600 ? drums : mobileImg}
+          ref={(el) => (guitarImg = el)}
+          src={guitar}
+          className="guitar"
+          onClick={showMenu}
         />
-        <h1 ref={(el) => (text = el)} className="title">
-          MUSIC
-          <br />
-          UNITES US
-        </h1>
+        <div ref={(el) => (nav = el)} className="nav">
+          <nav ref={(el) => (navContent = el)} className="nav-content">
+            <img
+              ref={(el) => (sticksImg = el)}
+              src={sticks}
+              className="sticks"
+              onClick={hideMenu}
+            />
+
+            <div className="links">
+              <h2 className="link">ABOUT</h2>
+              <h2 className="link">PROJECTS</h2>
+              <h2 className="link">CONTACT</h2>
+            </div>
+          </nav>
+        </div>
+
+        <div className="img-container">
+          <img
+            ref={(el) => (image = el)}
+            src={window.screen.width > 600 ? drums : mobileImg}
+          />
+          <h1 ref={(el) => (text = el)} className="title">
+            MUSIC
+            <br />
+            UNITES US
+          </h1>
+        </div>
       </div>
 
       <section className="secondary">
-        <div className="sec-container"></div>
+        <div className="sec-container">
+          <h1 ref={(el) => (heading = el)} className="heading">
+            Music is life.
+          </h1>
+          <p className="paragraph">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Reprehenderit ad reiciendis animi possimus totam labore blanditiis,
+            iste tempore modi pariatur aspernatur alias ipsum perspiciatis. Eum
+            labore quia assumenda animi tenetur, magnam reprehenderit? Earum hic
+            soluta sit neque voluptate unde accusamus impedit eos, voluptatem
+            asperiores quas recusandae assumenda, commodi, enim nesciunt?
+          </p>
+        </div>
       </section>
     </div>
   );
